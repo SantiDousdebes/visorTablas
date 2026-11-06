@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visor de Rangos Preflop - Cash 100BB</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Visor de Rangos Preflop</h1>
+            <p>Estrategia de Cash Games 100BB</p>
+        </header>
+        
+        <nav class="button-grid">
+            <button class="nav-btn" onclick="showTable('ep', event)">EP (Early Position)</button>
+            <button class="nav-btn" onclick="showTable('mp', event)">MP (Middle Position)</button>
+            <button class="nav-btn" onclick="showTable('co', event)">CO (Cutoff)</button>
+            <button class="nav-btn" onclick="showTable('btn1', event)">BTN (Open RFI)</button>
+            <button class="nav-btn" onclick="showTable('btn2', event)">BTN (vs 3-Bet)</button>
+            <button class="nav-btn" onclick="showTable('sb', event)">SB (Small Blind)</button>
+            <button class="nav-btn" onclick="showTable('bb1', event)">BB (Big Blind)</button>
+            <button class="nav-btn" onclick="showTable('bb2', event)">BB (vs Raise)</button>
+        </nav>
+        
+        <main class="viewer-area">
+            <div id="placeholder" class="placeholder">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <path d="M21 15l-5-5L5 21" />
+                </svg>
+                <p>Selecciona una posición para cargar la tabla preflop</p>
+            </div>
+            <img id="table-image" src="" alt="Tabla Preflop" class="hidden">
+        </main>
+    </div>
+
+    <script>
+        // Configuración de rutas de imágenes relativas a la carpeta 'tablas'
+        const paths = {
+            'ep': 'tablas/ep.jpg',
+            'mp': 'tablas/mp.jpg',
+            'co': 'tablas/co.png',
+            'btn1': 'tablas/btn.png',
+            'btn2': 'tablas/btn2.png',
+            'sb': 'tablas/sb.png',
+            'bb1': 'tablas/bb.png',
+            'bb2': 'tablas/bb2.png'
+        };
+
+        function showTable(pos, event) {
+            const img = document.getElementById('table-image');
+            const placeholder = document.getElementById('placeholder');
+            const buttons = document.querySelectorAll('.nav-btn');
+            
+            // Quitar clase activa de todos los botones y ponérsela al actual
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            // Ocultar imagen para reiniciar la transición limpia
+            img.classList.add('hidden');
+            
+            // Asignar nueva ruta de imagen
+            img.src = paths[pos];
+            
+            // Mostrar imagen y ocultar el placeholder inicial
+            img.classList.remove('hidden');
+            placeholder.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
